@@ -7,7 +7,7 @@ const EventModal = ({ date, onSubmit, event }) => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [description, setDescription] = useState("");
-  const [expense, setExpense] = useState(0);
+  const [expense, setExpense] = useState("");
   const isReadOnly = !!event;
 
   useEffect(() => {
@@ -49,13 +49,6 @@ const EventModal = ({ date, onSubmit, event }) => {
       <h2>
         {date} 일정 {isReadOnly ? "읽기" : "추가"}
       </h2>
-      <label>제목</label>
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        readOnly={isReadOnly}
-        required
-      />
       <Time>
         <label>시작 시간</label>
         <input
@@ -73,19 +66,30 @@ const EventModal = ({ date, onSubmit, event }) => {
           readOnly={isReadOnly}
         />
       </Time>
-      <label>내용</label>
-      <textarea
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        readOnly={isReadOnly}
-      ></textarea>
-      <label>소비금</label>
-      <input
-        type="number"
-        value={expense}
-        onChange={(e) => setExpense(e.target.value)}
-        readOnly={isReadOnly}
-      />
+      <Else>
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          readOnly={isReadOnly}
+          placeholder="제목을 입력해 주세요"
+          required
+        />
+
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          readOnly={isReadOnly}
+          placeholder="내용을 입력해 주세요"
+        ></textarea>
+        <label>소비금</label>
+        <input
+          type="number"
+          value={expense}
+          onChange={(e) => setExpense(e.target.value)}
+          placeholder="소비금"
+          readOnly={isReadOnly}
+        />
+      </Else>
       {!isReadOnly && <Button onClick={handleSubmit}>저장</Button>}
     </Form>
   );
@@ -103,6 +107,10 @@ const Form = styled.div`
 
 const Time = styled.div`
   display: flex;
+`;
+
+const Else = styled.div`
+  border: solid;
 `;
 
 const Button = styled.button`

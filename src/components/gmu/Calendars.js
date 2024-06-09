@@ -5,7 +5,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import EventModal from "./EventModal";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { getOnePlan } from "../../apis/gmu/planCalendar";
+import { getAllEvents, getOnePlan } from "../../apis/gmu/planCalendar";
 import ALOTlogo from "../../images/ALOTlogo.png";
 
 const Calendars = () => {
@@ -27,6 +27,16 @@ const Calendars = () => {
     };
 
     loadTours(); // 초기 로드 시 투어 데이터 가져오기
+  }, [id]);
+
+  useEffect(() => {
+    const loadEvents = async () => {
+      try {
+        const events = await getAllEvents(id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
   }, [id]);
 
   useEffect(() => {

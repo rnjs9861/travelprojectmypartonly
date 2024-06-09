@@ -20,6 +20,15 @@ export const getAllPlans = async () => {
   }
 };
 
+export const getAllEvents = async () => {
+  try {
+    const response = await axios.get(`${SERVER}/events`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // export const getOnePlan = async (id) => {
 //   try {
 //     const response = await axios.get(`${SERVER}/tour/${id}`);

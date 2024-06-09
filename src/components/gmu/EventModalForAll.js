@@ -1,6 +1,6 @@
 // src/EventModal.js
 import React, { useState, useEffect } from "react";
-import { saveEvent } from "./routes/api";
+import { saveEvent } from "../../apis/gmu/planCalendar";
 
 const EventModalForAll = ({ date, onSubmit, event }) => {
   const [title, setTitle] = useState("");
