@@ -4,4 +4,6 @@
 
 - allSchedule 페이지 plan에서 입력한 모든 정보 get 성공, events post 성공
 
-- 다만 events를 get하는데 실패
+- events get도 성공
+
+- 남은 할 일: Swagger로 테스트, 수정, 삭제 기능

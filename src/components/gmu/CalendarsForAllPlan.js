@@ -4,7 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import EventModal from "./EventModal";
 import styled from "styled-components";
-import { getAllPlans } from "../../apis/gmu/planCalendar";
+import { getAllEvents, getAllPlans } from "../../apis/gmu/planCalendar"; // 여기에서 getAllEvents를 가져옵니다.
 import ALOTlogo from "../../images/ALOTlogo.png";
 
 const CalendarsForAllPlan = () => {
@@ -13,13 +13,15 @@ const CalendarsForAllPlan = () => {
   const [selectedEvents, setSelectedEvents] = useState([]);
 
   useEffect(() => {
-    const loadAllPlans = async () => {
+    const loadAllData = async () => {
       try {
-        const plans = await getAllPlans(); // 모든 계획을 가져오기
-        console.log("Loaded Plans:", plans); // 로드된 계획 데이터 확인
+        const plans = await getAllPlans();
+        const eventsData = await getAllEvents();
+        console.log("Loaded Plans:", plans);
+        console.log("Loaded Events:", eventsData);
 
-        // 캘린더에서 필요한 형식으로 데이터 변환
-        const formattedEvents = plans.map((plan) => ({
+        // 플랜 데이터 형식 맞추기
+        const formattedPlans = plans.map((plan) => ({
           title: plan.tourTitle,
           start: plan.tourStartDay,
           end: plan.tourFinishDay,
@@ -27,13 +29,25 @@ const CalendarsForAllPlan = () => {
           expense: plan.expense,
         }));
 
-        setEvents(formattedEvents);
+        // 이벤트 데이터 형식 맞추기
+        const formattedEvents = eventsData.map((event) => ({
+          id: event.id,
+          title: event.title,
+          start: event.start,
+          end: event.end,
+          description: event.description,
+          expense: event.expense,
+        }));
+
+        // 플랜과 이벤트 데이터를 합치기
+        const combinedEvents = [...formattedPlans, ...formattedEvents];
+        setEvents(combinedEvents);
       } catch (error) {
-        console.error("Error loading plans:", error);
+        console.error("Error loading data:", error);
       }
     };
 
-    loadAllPlans(); // 초기 로드 시 모든 계획 데이터 가져오기
+    loadAllData();
   }, []);
 
   useEffect(() => {
@@ -121,7 +135,6 @@ const Header = styled.div`
 
 const CalendarContainer = styled.div`
   padding-top: 180.24px;
-
   display: flex;
 `;
 
