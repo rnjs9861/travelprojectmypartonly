@@ -2,8 +2,12 @@ import axios from "axios";
 import { SERVER } from "../config";
 
 export const postAccount = async (signupData) => {
-  const response = await axios.post(`${SERVER}/account`, signupData);
-  return response.data;
+  try {
+    const response = await axios.post(`${SERVER}/api/user/sign-up`, signupData);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const checkDuplicateId = async (userId) => {

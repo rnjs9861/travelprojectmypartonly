@@ -3,7 +3,7 @@ import { SERVER } from "../config";
 
 export const saveEvent = async (event) => {
   try {
-    const response = await axios.post(`${SERVER}/events`, event);
+    const response = await axios.post(`${SERVER}/tour/schedule`, event);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -13,7 +13,9 @@ export const saveEvent = async (event) => {
 
 export const getAllPlans = async () => {
   try {
-    const response = await axios.get(`${SERVER}/tour`);
+    const response = await axios.get(
+      `${SERVER}/api/tour/schedule/tourScheduleList`
+    );
     return response.data;
   } catch (error) {
     console.log(error);

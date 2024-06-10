@@ -7,117 +7,6 @@ import ALOTlogo from "../../images/ALOTlogo.png";
 import { deletePlan, modifyPlan } from "../../apis/gmu/planModifyApi";
 import { postPlan } from "../../apis/gmu/planApi";
 
-const Wrapper = styled.div`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Header = styled.header`
-  h1 {
-    background-color: blue;
-    padding: 20px 20px 20px 20px;
-    margin: 0 auto;
-  }
-  img {
-    margin: auto;
-    display: block;
-    width: 300px;
-  }
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-`;
-
-const LeftSection = styled.div`
-  position: relative;
-  height: 80vh;
-
-  @media (max-width: 760px) {
-    display: none;
-  }
-`;
-
-const MapForMobile = styled.div`
-  display: none;
-  @media (max-width: 760px) {
-    display: block;
-  }
-`;
-
-const RightSection = styled.div`
-  position: absolute;
-  right: 20px;
-  width: 300px;
-  height: 80vh;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 100000;
-  transform: translateX(100%);
-  opacity: 0;
-  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-  animation: slideIn 0.5s ease-in-out 0.1s forwards;
-  overflow-x: hidden;
-
-  @keyframes slideIn {
-    to {
-      transform: translateX(0);
-      opacity: 1;
-      right: 0;
-    }
-  }
-
-  @media (max-width: 760px) {
-    position: relative;
-    margin: 0 auto;
-  }
-`;
-
-const Form = styled.form`
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const FormGroup = styled.div`
-  margin-bottom: 20px;
-`;
-
-const Label = styled.label`
-  font-weight: bold;
-`;
-
-const Input = styled.input`
-  width: calc(100% - 12px);
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  background-color: #1e88e5;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #005cb2;
-  }
-`;
-const Footer = styled.div`
-  z-index: 999999;
-  background-color: blue;
-  margin: 0px 0px 0px 0px;
-`;
-
 const Plan = () => {
   const [planId, setPlanId] = useState("");
   const [title, setTitle] = useState("");
@@ -149,6 +38,12 @@ const Plan = () => {
   const handleChange = (e) => {
     const updatePlan = { ...planId, [e.target.name]: e.target.value };
     setPlanId(updatePlan);
+  };
+
+  const handlePatchPlan = async () => {
+    try {
+      await handleModify();
+    } catch (error) {}
   };
 
   const handleModify = async (e) => {
@@ -295,3 +190,114 @@ const Plan = () => {
 };
 
 export default Plan;
+
+const Wrapper = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Header = styled.header`
+  h1 {
+    background-color: blue;
+    padding: 20px 20px 20px 20px;
+    margin: 0 auto;
+  }
+  img {
+    margin: auto;
+    display: block;
+    width: 300px;
+  }
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+`;
+
+const LeftSection = styled.div`
+  position: relative;
+  height: 80vh;
+
+  @media (max-width: 760px) {
+    display: none;
+  }
+`;
+
+const MapForMobile = styled.div`
+  display: none;
+  @media (max-width: 760px) {
+    display: block;
+  }
+`;
+
+const RightSection = styled.div`
+  position: absolute;
+  right: 20px;
+  width: 300px;
+  height: 80vh;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 100000;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  animation: slideIn 0.5s ease-in-out 0.1s forwards;
+  overflow-x: hidden;
+
+  @keyframes slideIn {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+      right: 0;
+    }
+  }
+
+  @media (max-width: 760px) {
+    position: relative;
+    margin: 0 auto;
+  }
+`;
+
+const Form = styled.form`
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const FormGroup = styled.div`
+  margin-bottom: 20px;
+`;
+
+const Label = styled.label`
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  width: calc(100% - 12px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+const Button = styled.button`
+  padding: 10px 20px;
+  background-color: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #005cb2;
+  }
+`;
+const Footer = styled.div`
+  z-index: 999999;
+  background-color: blue;
+  margin: 0px 0px 0px 0px;
+`;

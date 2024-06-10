@@ -8,6 +8,7 @@ const EventModal = ({ date, onSubmit, event }) => {
   const [endTime, setEndTime] = useState("");
   const [description, setDescription] = useState("");
   const [expense, setExpense] = useState("");
+
   const isReadOnly = !!event;
 
   useEffect(() => {
@@ -23,15 +24,15 @@ const EventModal = ({ date, onSubmit, event }) => {
   const handleSubmit = async () => {
     const newEvent = {
       title,
-      start: `${date}T${startTime}`,
-      end: `${date}T${endTime}`,
-      description,
-      expense,
+      tourScheduleStart: `${date}T${startTime}`,
+      tourScheduleEnd: `${date}T${endTime}`,
+      contents: description,
+      cost: expense,
     };
 
     try {
       const savedEvent = await saveEvent(newEvent);
-      console.log("Event saved", savedEvent);
+      console.log(savedEvent);
       onSubmit(savedEvent); // 저장된 이벤트 데이터 전달
       // 폼 초기화
       setTitle("");
@@ -102,7 +103,7 @@ const Form = styled.div`
   border-radius: 10px;
   margin-top: 10px;
   padding: 10px 5px 5px 5px;
-  background-color: blue;
+  background-color: white;
 `;
 
 const Time = styled.div`

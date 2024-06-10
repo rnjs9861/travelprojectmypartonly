@@ -139,7 +139,7 @@ const EventModalWrap = styled.div`
   width: 300px;
   padding: 20px;
   border-left: 1px solid #ccc;
-  background-color: #f9f9f9;
+  background-color: white;
   overflow-y: auto;
 `;
 

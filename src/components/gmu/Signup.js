@@ -82,10 +82,10 @@ const Signup = () => {
     }
 
     const signupData = {
-      userId,
-      userPw,
-      userName,
-      userEmail,
+      uid: userId,
+      upw: userPw,
+      nm: userName,
+      email: userEmail,
     };
 
     try {

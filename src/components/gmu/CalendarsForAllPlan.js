@@ -122,7 +122,7 @@ const Header = styled.div`
   z-index: 100;
 
   h1 {
-    background-color: blue;
+    background-color: #f5f5f5;
     padding: 20px 20px 20px 20px;
     margin: 0 auto;
   }
