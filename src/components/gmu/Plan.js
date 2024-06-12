@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Map from "./Map";
 import axios from "axios";
 import styled from "styled-components";
@@ -42,7 +42,7 @@ const Plan = () => {
     e.preventDefault();
 
     const writeData = {
-      tourTitle: tourTitle,
+      title: tourTitle,
       tourStartDay,
       tourFinishDay,
       tourLocation,

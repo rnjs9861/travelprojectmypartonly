@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   deleteAccount,
   getUserInfo,
@@ -13,11 +13,12 @@ const EditProfile = () => {
   const [userEmail, setUserEmail] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const navigate = useNavigate();
+  const { id } = useParams();
 
   useEffect(() => {
-    const fetchUserInfo = async () => {
+    const fetchUserInfo = async (id) => {
       try {
-        const userData = await getUserInfo();
+        const userData = await getUserInfo(id);
         setUserInfo(userData);
         setUserName(userData.userName);
         setUserEmail(userData.userEmail);

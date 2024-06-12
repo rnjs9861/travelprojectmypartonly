@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ALOTlogo from "../../images/ALOTlogo.png";
 import { checkDuplicateId, postAccount } from "../../apis/gmu/signupApi";
+import { userInfoContext } from "../../context/UserInfoProvider";
 
-const Signup = () => {
+const Signup = ({ setOnHeader }) => {
+  const { isUser } = useContext(userInfoContext);
+  console.log(isUser);
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
@@ -20,16 +23,36 @@ const Signup = () => {
 
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const validateInput = (value, type) => {
-    const regEx = /^(?=.*\d).{5,}$/;
+  // const validateInput = (value, type) => {
+  //   const regEx = /^(?=.*\d).{5,}$/;
+  //   if (!regEx.test(value)) {
+  //     return `${type}는 5자 이상과 숫자가 포함되어야 합니다.`;
+  //   }
+  //   return "";
+  // };
+
+  useEffect(() => {
+    setOnHeader(false);
+  }, []);
+
+  const validateInputId = (value, type) => {
+    const regEx = /^[a-zA-Z0-9]{6,12}$/;
     if (!regEx.test(value)) {
-      return `${type}는 5자 이상과 숫자가 포함되어야 합니다.`;
+      return `${type}는 6~12 글자 영문 대소문자 숫자 0~9 만 가능.`;
+    }
+    return "";
+  };
+
+  const validateInputPw = (value, type) => {
+    const regEx = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+    if (!regEx.test(value)) {
+      return `${type}는 영문 8~20 글자, 특수문자 1개이상 포함, 숫자포함되어야 합니다.`;
     }
     return "";
   };
 
   const validateEmail = (email) => {
-    const regEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const regEx = /^[a-zA-Z0-9]{8,12}@[a-z]{3,5}\\.(com|net|org){1}$/;
     return regEx.test(email);
   };
 
@@ -37,7 +60,7 @@ const Signup = () => {
     const newId = e.target.value;
     setUserId(newId);
 
-    const validationError = validateInput(newId, "ID");
+    const validationError = validateInputId(newId, "ID");
     setIdError(validationError);
 
     if (!validationError) {
@@ -59,12 +82,12 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const idValidationError = validateInput(userId, "ID");
-    const pwValidationError = validateInput(userPw, "비밀번호");
+    const idValidationError = validateInputId(userId, "ID");
+    const pwValidationError = validateInputPw(userPw, "비밀번호");
     const confirmPwValidationError =
       userPw !== confirmPw ? "비밀번호가 일치하지 않습니다." : "";
     const emailValidationError = !validateEmail(userEmail)
-      ? "올바른 이메일 형식이 아닙니다."
+      ? "아이디(숫자, 영어 대소문자만 8자~12자) @ 도메인 . (com, net, org)중 1개 필수"
       : "";
 
     setIdError(idValidationError);
@@ -82,10 +105,10 @@ const Signup = () => {
     }
 
     const signupData = {
-      userId,
-      userPw,
-      userName,
-      userEmail,
+      uid: userId,
+      upw: userPw,
+      nm: userName,
+      email: userEmail,
     };
 
     try {
@@ -121,7 +144,7 @@ const Signup = () => {
               value={userPw}
               onChange={(e) => {
                 setUserPw(e.target.value);
-                setPwError(validateInput(e.target.value, "비밀번호"));
+                setPwError(validateInputPw(e.target.value, "비밀번호"));
               }}
             />
             {pwError && <ErrorMessage>{pwError}</ErrorMessage>}

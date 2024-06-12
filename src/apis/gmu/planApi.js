@@ -46,3 +46,21 @@ export const deletePlan = async (id) => {
 // export const getPlan = (id) => {
 //   return axios.get(`${SERVER}/api/tour?signed_user_id=${id}`);
 // };
+
+// export const updatePlan = async (id, updatedPlan) => {
+//   try {
+//     const response = await axios.put(`${SERVER}/api/tour/${id}`, updatedPlan);
+//     return response.data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// export const deletePlan = async (id) => {
+//   try {
+//     const response = await axios.delete(`${SERVER}/api/tour/${id}`);
+//     return response.data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
