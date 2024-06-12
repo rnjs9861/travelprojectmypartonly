@@ -24,6 +24,8 @@
 
 - tour_schedule에 date 따로 뺌
 
+- plan/:id 의 경우 새로고침시 캘린더에 나오지 않음
+
 # 남은 할 일
 
 - 로그인 후 Swagger로 테스트, 수정, 삭제 기능
