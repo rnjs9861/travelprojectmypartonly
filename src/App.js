@@ -12,10 +12,10 @@ import PlanModifyPage from "./pages/gmu/PlanModifyPage";
 import PlanPage from "./pages/gmu/PlanPage";
 import SignupPage from "./pages/gmu/SignupPage";
 import CheckList from "./pages/ldh/CheckList";
-import LogIn from "./pages/ldh/LogIn";
 import UserInfo from "./pages/ldh/UserInfo";
 import Main from "./pages/ldh/Main";
 import Footer from "./components/gmu/Footer";
+import Login from "./components/gmu/Login";
 
 function App() {
   const [onHeader, setOnHeader] = useState(true);
@@ -24,10 +24,7 @@ function App() {
       <BrowserRouter>
         <Header onheader={onHeader} />
         <Routes>
-          <Route
-            path="/login"
-            element={<LogIn setOnHeader={setOnHeader} />}
-          ></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/" element={<Main />}></Route>
           <Route path="/checklist" element={<CheckList></CheckList>}></Route>
           <Route path="/userinfo" element={<UserInfo />} />

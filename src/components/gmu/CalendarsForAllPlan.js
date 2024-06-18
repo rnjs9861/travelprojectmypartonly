@@ -81,7 +81,7 @@ const CalendarsForAllPlan = () => {
                 <SelectedDate>{selectedDate} 일정</SelectedDate>
                 {selectedEvents.map((event, index) => (
                   <EventSummary key={index}>
-                    <strong>{event.title}</strong>
+                    <Strong>{event.title}</Strong>
                     <br />
                     {event.extendedProps?.type === "plan" ? (
                       <>
@@ -94,7 +94,7 @@ const CalendarsForAllPlan = () => {
                           시간: {event.start.split("T")[1]} -{" "}
                           {event.end.split("T")[1]}
                         </p>
-                        <p>설명: {event.description}</p>
+                        <p>내용: {event.description}</p>
                         <p>비용: {event.expense}</p>
                       </>
                     )}
@@ -112,6 +112,11 @@ const CalendarsForAllPlan = () => {
 export default CalendarsForAllPlan;
 
 // Styled-components
+
+const Strong = styled.h1`
+  font-size: 20px;
+  font-weight: bold;
+`;
 
 const Header = styled.header`
   position: fixed;

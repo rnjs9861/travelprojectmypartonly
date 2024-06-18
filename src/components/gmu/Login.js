@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import ALOTlogo from "../../images/ALOTlogo.png";
 import { postLogin } from "../../apis/gmu/loginApi"; // 로그인 API 함수 가져오기
 
 const Login = () => {

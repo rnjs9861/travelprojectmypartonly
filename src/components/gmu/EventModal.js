@@ -4,17 +4,17 @@ import { saveEvent } from "../../apis/gmu/planCalendar";
 
 const EventModal = ({ date, onSubmit, event, tourId }) => {
   const [title, setTitle] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [startTime, setStartTime] = useState("00:00");
+  const [endTime, setEndTime] = useState("00:00");
   const [description, setDescription] = useState("");
-  const [expense, setExpense] = useState("");
+  const [expense, setExpense] = useState(0);
   const isReadOnly = !!event;
 
   useEffect(() => {
     if (event) {
       setTitle(event.title || "");
-      setStartTime(event.start || "");
-      setEndTime(event.end || "");
+      setStartTime(formatTime(event.start) || "00:00"); // 시간 형식 변환
+      setEndTime(formatTime(event.end) || "00:00"); // 시간 형식 변환
       setDescription(event.description || "");
       setExpense(event.expense || 0);
     }
@@ -28,19 +28,18 @@ const EventModal = ({ date, onSubmit, event, tourId }) => {
       end: endTime,
       date: `${date}`,
       description,
-      expense,
+      expense: parseFloat(expense),
     };
 
     try {
       const savedEvent = await saveEvent(newEvent);
-      console.log(savedEvent);
-      onSubmit(savedEvent); // 저장된 이벤트 데이터 전달
-      // 폼 초기화
+      console.log("Event saved:", savedEvent);
+      onSubmit(savedEvent);
       setTitle("");
-      setStartTime("");
-      setEndTime("");
+      setStartTime("00:00");
+      setEndTime("00:00");
       setDescription("");
-      setExpense(0); // 초기화할 때 숫자는 0으로 설정
+      setExpense(0);
     } catch (error) {
       console.error(error);
     }
@@ -98,22 +97,57 @@ const EventModal = ({ date, onSubmit, event, tourId }) => {
 
 export default EventModal;
 
+// 시간 형식을 HH:mm으로 변환하는 함수
+const formatTime = (timeString) => {
+  if (!timeString) return "";
+
+  // timeString이 '2024-06-13T15:04' 형식이라면 이를 HH:mm으로 변환
+  const time = new Date(timeString);
+  return time.toLocaleTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
+
 const Form = styled.div`
-  border: solid;
   border-radius: 10px;
   margin-top: 10px;
   padding: 10px 5px 5px 5px;
-  background-color: blue;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 `;
 
 const Time = styled.div`
   display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  label {
+    margin-bottom: 5px;
+  }
+  input {
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 1rem;
+  }
 `;
 
 const Else = styled.div`
-  border: solid;
+  margin-bottom: 10px;
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    resize: none;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
 `;
-
 const Button = styled.button`
   padding: 10px 20px;
   background-color: #1e88e5;
