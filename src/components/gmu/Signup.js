@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import ALOTlogo from "../../images/ALOTlogo.png";
 import { checkDuplicateId, postAccount } from "../../apis/gmu/signupApi";
 
 const Signup = () => {

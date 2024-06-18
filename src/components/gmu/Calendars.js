@@ -6,7 +6,6 @@ import EventModal from "./EventModal";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { getAllEvents, getOnePlan } from "../../apis/gmu/planCalendar";
-import ALOTlogo from "../../images/ALOTlogo.png";
 
 const Calendars = () => {
   const { id: tourId } = useParams();

@@ -1,0 +1,50 @@
+.main{
+    width: 100%;
+    height: 500px;
+}
+.main-inner{
+    margin: 0 auto;
+    max-width: 400px;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    padding: 30px;
+}
+.main-content{
+    width: 100%;
+}
+.main-content-login{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    border: 1px solid red;
+    padding: 20px;
+}
+.uid{
+    width: 100%;
+    height: 50px;
+}
+.password{
+    width: 100%;
+    height: 50px;
+}
+input::placeholder{
+    padding-left: 10px;
+}
+.button{
+    margin-top: 50px;
+    width: 100%;
+    height: 40px;
+}
+.user-login-menu{
+    display: flex;
+    justify-content: space-around;
+    font-size: 12px;
+}
+.none-id{
+    display: none;
+}
+.none-password{
+    display: none;
+}

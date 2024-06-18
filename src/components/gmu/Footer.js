@@ -18,15 +18,16 @@ export default Footer;
 
 const FooterBody = styled.div`
   margin: 0 auto;
-
-  background-color: gray;
+  background-color: skyblue;
   height: 200px;
-  padding: 80px 0px;
+  padding: 20px 0px;
   text-align: center;
+  color: white;
 `;
 
 const FirmName = styled.div`
   padding: 10px 10px 10px 10px;
+  font-size: 20px;
 `;
 
 const Ad = styled.div`

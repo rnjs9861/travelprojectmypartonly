@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Map from "./Map";
 import MapMobile from "./MapMobile";
-import ALOTlogo from "../../images/ALOTlogo.png";
 import { deletePlan, getPlan, updatePlan } from "../../apis/gmu/planApi";
 
 const PlanModify = () => {

@@ -3,7 +3,6 @@ import Map from "./Map";
 import axios from "axios";
 import styled from "styled-components";
 import MapMobile from "./MapMobile";
-import ALOTlogo from "../../images/ALOTlogo.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { postPlan } from "../../apis/gmu/planApi";
 
