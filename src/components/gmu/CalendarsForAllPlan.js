@@ -94,8 +94,11 @@ const CalendarsForAllPlan = () => {
                           시간: {event.start.split("T")[1]} -{" "}
                           {event.end.split("T")[1]}
                         </p>
-                        <p>내용: {event.description}</p>
-                        <p>비용: {event.expense}</p>
+                        <p></p>
+                        <br />
+                        <p>
+                          <Button>상세보기</Button>
+                        </p>
                       </>
                     )}
                   </EventSummary>
@@ -166,4 +169,16 @@ const EventSummary = styled.div`
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #fff;
+`;
+const Button = styled.button`
+  padding: 7px 16px;
+  background-color: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #005cb2;
+  }
 `;

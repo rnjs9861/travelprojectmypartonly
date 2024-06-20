@@ -48,7 +48,7 @@ const EventModal = ({ date, onSubmit, event, tourId }) => {
   return (
     <Form>
       <h2>
-        {date} 일정 {isReadOnly ? "읽기" : "추가"}
+        {date} 일정 {isReadOnly ? "" : "추가"}
       </h2>
       <Time>
         <label>시작 시간</label>
@@ -68,6 +68,7 @@ const EventModal = ({ date, onSubmit, event, tourId }) => {
         />
       </Time>
       <Else>
+        <label>제목</label>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -75,22 +76,28 @@ const EventModal = ({ date, onSubmit, event, tourId }) => {
           placeholder="제목을 입력해 주세요"
           required
         />
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          readOnly={isReadOnly}
-          placeholder="내용을 입력해 주세요"
-        ></textarea>
-        <label>소비금</label>
-        <input
-          type="number"
-          value={expense}
-          onChange={(e) => setExpense(e.target.value)}
-          placeholder="소비금"
-          readOnly={isReadOnly}
-        />
+        {!isReadOnly && (
+          <>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="내용을 입력해 주세요"
+            ></textarea>
+            <label>소비금</label>
+            <input
+              type="number"
+              value={expense}
+              onChange={(e) => setExpense(e.target.value)}
+              placeholder="소비금"
+            />
+          </>
+        )}
       </Else>
-      {!isReadOnly && <Button onClick={handleSubmit}>저장</Button>}
+      {isReadOnly ? (
+        <ReadOnlyButton>상세보기</ReadOnlyButton>
+      ) : (
+        <Button onClick={handleSubmit}>저장</Button>
+      )}
     </Form>
   );
 };
@@ -148,12 +155,27 @@ const Else = styled.div`
     margin-bottom: 5px;
   }
 `;
+
 const Button = styled.button`
   padding: 10px 20px;
   background-color: #1e88e5;
   color: white;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #005cb2;
+  }
+`;
+
+const ReadOnlyButton = styled.button`
+  padding: 5px 10px;
+  background-color: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
   cursor: pointer;
 
   &:hover {

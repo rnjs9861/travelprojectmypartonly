@@ -155,9 +155,6 @@ const Plan = () => {
           </RightSection>
         </Content>
       </main>
-      <Footer>
-        <p>푸터</p>
-      </Footer>
     </Wrapper>
   );
 };
@@ -165,7 +162,6 @@ const Plan = () => {
 export default Plan;
 
 const Wrapper = styled.div`
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 `;
@@ -267,9 +263,4 @@ const Button = styled.button`
   &:hover {
     background-color: #005cb2;
   }
-`;
-const Footer = styled.div`
-  z-index: 999999;
-  background-color: blue;
-  margin: 0px 0px 0px 0px;
 `;

@@ -173,9 +173,6 @@ const PlanModify = () => {
           </RightSection>
         </Content>
       </main>
-      <Footer>
-        <p>푸터</p>
-      </Footer>
     </Wrapper>
   );
 };
@@ -183,7 +180,6 @@ const PlanModify = () => {
 export default PlanModify;
 
 const Wrapper = styled.div`
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 `;
